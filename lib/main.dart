@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_comanda_eletronica/model/table.dart';
+import 'package:mobile_comanda_eletronica/pages/order/select_category.dart';
 import 'package:mobile_comanda_eletronica/repositories/TableRepository.dart';
 
 void main() {
@@ -89,8 +90,8 @@ class _MyHomePageState extends State<MyHomePage> {
           itemBuilder: (context, index) {
             return ElevatedButton(
               onPressed: () {
-                //write your onPressed function here
-                print('01');
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SelectCategory()));
               },
               style: ElevatedButton.styleFrom(
                 primary: isAvailable(tables[index].status),
