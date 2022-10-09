@@ -3,7 +3,7 @@ import 'package:mobile_comanda_eletronica/model/category.dart';
 
 class CategoryRest {
   Future getAll() async {
-    var url = Uri.parse('http://192.168.0.102:3333/categories');
+    var url = Uri.parse('http://192.168.0.79:3333/categories');
     http.Response? response;
 
     try {

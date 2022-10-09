@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_comanda_eletronica/model/product.dart';
+import 'package:mobile_comanda_eletronica/pages/order/add_order.dart';
 import 'package:mobile_comanda_eletronica/repositories/ProductRepository.dart';
 
 class SelectProduct extends StatefulWidget {
@@ -31,7 +32,9 @@ class _SelectProductState extends State<SelectProduct> {
           itemBuilder: (context, index) {
             return GestureDetector(
                 onTap: () {
-                  print("meu ovo");
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          AddOrder(product: products[index])));
                 },
                 child: Container(
                   padding: EdgeInsets.all(7.0),
