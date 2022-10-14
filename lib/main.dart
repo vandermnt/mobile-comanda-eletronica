@@ -90,8 +90,9 @@ class _MyHomePageState extends State<MyHomePage> {
           itemBuilder: (context, index) {
             return ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => SelectCategory()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>
+                        SelectCategory(tableId: tables[index].id)));
               },
               style: ElevatedButton.styleFrom(
                 primary: isAvailable(tables[index].status),

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 class Tables {
-  int? id;
-  bool? status;
-  int? number;
+  int id;
+  bool status;
+  int number;
 
   Tables(this.id, this.status, this.number);
 

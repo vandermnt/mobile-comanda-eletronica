@@ -4,7 +4,9 @@ import 'package:mobile_comanda_eletronica/pages/order/select_product.dart';
 import 'package:mobile_comanda_eletronica/repositories/CategoryRepository.dart';
 
 class SelectCategory extends StatefulWidget {
-  // const SelectCategory({Key? key}) : super(key: key);
+  final int tableId;
+
+  const SelectCategory({Key? key, required this.tableId}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _SelectCategoryState();
@@ -25,15 +27,17 @@ class _SelectCategoryState extends State<SelectCategory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Categorias"),
+        title: const Text("Categorias"),
       ),
       body: ListView.builder(
           itemCount: categories.length,
           itemBuilder: (context, index) {
             return ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => SelectProduct()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => SelectProduct(
+                        tableId: widget.tableId,
+                        categoryId: categories[index].id)));
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.blueAccent,

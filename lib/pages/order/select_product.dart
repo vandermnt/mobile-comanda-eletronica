@@ -4,7 +4,12 @@ import 'package:mobile_comanda_eletronica/pages/order/add_order.dart';
 import 'package:mobile_comanda_eletronica/repositories/ProductRepository.dart';
 
 class SelectProduct extends StatefulWidget {
-  const SelectProduct({Key? key}) : super(key: key);
+  final int tableId;
+  final int categoryId;
+
+  const SelectProduct(
+      {Key? key, required this.tableId, required this.categoryId})
+      : super(key: key);
 
   @override
   State<SelectProduct> createState() => _SelectProductState();
@@ -33,8 +38,10 @@ class _SelectProductState extends State<SelectProduct> {
             return GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>
-                          AddOrder(product: products[index])));
+                      builder: (context) => AddOrder(
+                          product: products[index],
+                          categoryId: widget.categoryId,
+                          tableId: widget.tableId)));
                 },
                 child: Container(
                   padding: EdgeInsets.all(7.0),

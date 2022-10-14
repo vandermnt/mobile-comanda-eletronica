@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 class Category {
-  int? id;
-  String? name;
+  int id;
+  String name;
 
   Category(this.id, this.name);
 
