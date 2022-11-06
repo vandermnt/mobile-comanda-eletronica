@@ -22,8 +22,9 @@ class _SelectProductState extends State<SelectProduct> {
 
   @override
   void initState() {
+    getProductByCategory(widget.categoryId);
+
     super.initState();
-    getAllProducts();
   }
 
   @override
@@ -44,46 +45,68 @@ class _SelectProductState extends State<SelectProduct> {
                           tableId: widget.tableId)));
                 },
                 child: Container(
-                  padding: EdgeInsets.all(7.0),
-                  child: Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Card(
-                          color: Color.fromARGB(255, 213, 252, 255),
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              child: Column(children: <Widget>[
-                                Text(
-                                  "${products[index].name} | ${products[index].price}",
-                                  // maxLines: 1,
-                                  // overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(fontSize: 20),
+                  padding: EdgeInsets.all(15.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Card(
+                        color: Color.fromARGB(255, 24, 167, 220),
+                        child: Align(
+                          // alignment: Alignment.topLeft,
+                          child: Container(
+                            alignment: Alignment.centerLeft,
+                            padding: EdgeInsets.all(20),
+                            child: Row(children: <Widget>[
+                              SizedBox(
+                                width: 200, // set this
+
+                                child: Column(children: <Widget>[
+                                  Text("${products[index].name}",
+                                      style: TextStyle(
+                                          fontSize: 35,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255))),
+                                  Text(
+                                    "${products[index].description}",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color:
+                                            Color.fromARGB(255, 234, 234, 234)),
+                                  )
+                                ]),
+                              ),
+                              SizedBox(
+                                width: 150, // set this
+                                child: Column(
+                                  children: [
+                                    Text("R\$ ${products[index].price}",
+                                        style: TextStyle(
+                                            backgroundColor: Colors.green,
+                                            fontSize: 32,
+                                            color: Color.fromARGB(
+                                                255, 234, 234, 234)),
+                                        textAlign: TextAlign.right),
+                                  ],
                                 ),
-                                Text(
-                                  "${products[index].description}",
-                                  style: TextStyle(fontSize: 14),
-                                ),
-                              ]),
-                            ),
+                              ),
+                            ]),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ));
           }),
     );
   }
 
-  Future getAllProducts() async {
-    final productsFromRepository = await productRepository.getAll();
+  Future getProductByCategory(categoryId) async {
+    final productsFromRepository =
+        await productRepository.getProductByCategory(categoryId);
     setState(() {
       products = productsFromRepository;
     });
   }
-
-  Future addOrder() async {}
 }

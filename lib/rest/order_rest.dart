@@ -4,7 +4,7 @@ import '../shared/config.dart';
 
 class OrderRest {
   Future addItem(order) async {
-    var url = Uri.parse('http://192.168.0.102:3333/categories/orders');
+    var url = Uri.parse('http://192.168.0.102:3333/orders');
     http.Response? response;
 
     try {

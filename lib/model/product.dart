@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 class Product {
-  int? id;
-  String? name;
-  int? price;
-  String? description;
+  int id;
+  String name;
+  String price;
+  String description;
 
   Product(this.id, this.name, this.price, this.description);
 

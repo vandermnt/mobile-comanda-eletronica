@@ -7,4 +7,8 @@ class ProductRepository {
   Future getAll() async {
     return await api.getAll();
   }
+
+  Future getProductByCategory(categoryId) async {
+    return await api.getProductByCategory(categoryId);
+  }
 }

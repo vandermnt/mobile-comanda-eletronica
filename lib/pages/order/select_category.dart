@@ -32,24 +32,49 @@ class _SelectCategoryState extends State<SelectCategory> {
       body: ListView.builder(
           itemCount: categories.length,
           itemBuilder: (context, index) {
-            return ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => SelectProduct(
-                        tableId: widget.tableId,
-                        categoryId: categories[index].id)));
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.blueAccent,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Opacity(opacity: 0, child: Icon(Icons.arrow_forward)),
-                  Text('${categories[index].name}'),
-                ],
-              ),
-            );
+            return Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => SelectProduct(
+                            tableId: widget.tableId,
+                            categoryId: categories[index].id)));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blueAccent,
+
+                    minimumSize: Size(600, 70),
+                    // Text Color
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Opacity(opacity: 0, child: Icon(Icons.arrow_forward)),
+                      Text('${categories[index].name.toUpperCase()}'),
+                    ],
+                  ),
+                ));
+
+            // return ElevatedButton(
+            //   onPressed: () {
+            //     Navigator.of(context).push(MaterialPageRoute(
+            //         builder: (context) => SelectProduct(
+            //             tableId: widget.tableId,
+            //             categoryId: categories[index].id)));
+            //   },
+            //   style: ElevatedButton.styleFrom(
+            //     primary: Colors.blueAccent,
+            //   ),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Opacity(opacity: 0, child: Icon(Icons.arrow_forward)),
+            //       Text('${categories[index].name}'),
+            //     ],
+            //   ),
+            // );
           }),
 
       // This trailing comma makes auto-formatting nicer for build methods.
