@@ -6,7 +6,7 @@ import '../model/table.dart';
 
 class TableRest {
   Future getAll() async {
-    var url = Uri.parse('http://192.168.0.102:3333/tables');
+    var url = Uri.parse('http://192.168.0.104:3333/tables');
     http.Response? response;
 
     try {

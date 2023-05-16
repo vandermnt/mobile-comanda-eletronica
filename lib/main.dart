@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:mobile_comanda_eletronica/model/table.dart';
+import 'package:mobile_comanda_eletronica/pages/login/login.dart';
 import 'package:mobile_comanda_eletronica/pages/order/select_category.dart';
 import 'package:mobile_comanda_eletronica/repositories/TableRepository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,19 +17,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mesas',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Mesas'),
+      home: const MyHomePage(),
+      builder: EasyLoading.init(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -41,8 +42,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
+    EasyLoading.show(status: '');
     super.initState();
-    getAllTables();
+
+    verifyToken().then((token) {
+      EasyLoading.dismiss();
+      if (!token) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (BuildContext context) => LoginPage()));
+      } else {
+        getAllTables();
+      }
+    });
+
     _scrollController = ScrollController();
   }
 
@@ -56,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text("Mesas"),
       ),
 
       body: ListView.builder(
@@ -101,5 +113,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   isAvailable(status) {
     return status ? Colors.green : Colors.red;
+  }
+
+  Future<bool> verifyToken() async {
+    // verifica se tem um chave token dentro do aplicativo
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    if (sharedPreferences.getString('token') != null) {
+      return true;
+    }
+
+    return false;
   }
 }

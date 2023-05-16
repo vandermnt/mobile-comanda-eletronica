@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:mobile_comanda_eletronica/model/order.dart';
 import 'package:mobile_comanda_eletronica/model/product.dart';
 import 'package:mobile_comanda_eletronica/pages/order/select_category.dart';
@@ -60,7 +61,9 @@ class _AddOrderState extends State<AddOrder> {
                 minimumSize: const Size.fromHeight(50), // NEW
               ),
               onPressed: () {
-                showAlertDialog(context);
+                // showAlertDialog(context);
+                EasyLoading.showSuccess('Pedido realizado!');
+
                 this.addOrder();
               },
               child: const Text("ADICIONAR ITEM")),
@@ -84,7 +87,8 @@ class _AddOrderState extends State<AddOrder> {
     final order = buildOrder();
     await orderRepository.addItem(order);
     // ignore: use_build_context_synchronously
-    await showAlertDialog(context);
+
+    // await showAlertDialog(context);
   }
 
   buildOrder() {
